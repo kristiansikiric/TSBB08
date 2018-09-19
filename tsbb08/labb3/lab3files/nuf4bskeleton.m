@@ -27,7 +27,10 @@ imagesc(new); axis image;
 m = [0 0 0; 0 1 0; 1 0 0];
 n = [0 0 0; 0 0 0; 0 0 0];
 
-new = imerode(new, m).*imerode(new', n);
+new = imerode(new, m) & imerode(~new, n);
 
 figure(4); colormap(gray(256))
 imagesc(new); axis image;
+
+[y, x] = find(new);
+[yout, xout] = track10(nuf4b, y, x)
