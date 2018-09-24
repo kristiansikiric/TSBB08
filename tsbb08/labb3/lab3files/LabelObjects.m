@@ -8,7 +8,7 @@ axis image; title('Circles'); colorbar
 subplot(2,2,2), imagesc(ImLabel);
 axis image; title('Label image'); colorbar
 
-ImLabel5 = gray2ind(ImLabel==5);
+ImLabel5 = (ImLabel==5);
 subplot(2,2,3); imagesc(ImLabel5);
 axis image; title('Label image'); colorbar
 

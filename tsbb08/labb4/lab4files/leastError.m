@@ -35,7 +35,7 @@ while abs(t0-t1) > 0.5
     % Calculate probability for the lower part of the histogram
     %---------------------------------------------------
     lowersum1 = sum(histo(1:t0+1));
-    lowersum2 = sum(histo(t0+2:num));
+    lowersum2 = sum(histo(1:num));
     if lowersum2 ~= 0
         p0 = lowersum1/lowersum2;
     else
@@ -65,7 +65,7 @@ while abs(t0-t1) > 0.5
     % Calculate probability for the upper part of the histogram
     %---------------------------------------------------
     uppersum1 = sum(histo(t0+2:num));
-    uppersum2 = sum(histo(t0+2:num));
+    uppersum2 = sum(histo(1:num));
     if lowersum2 ~= 0
         p1 = uppersum1/uppersum2;
     else
