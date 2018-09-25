@@ -1,4 +1,4 @@
-im = imread('nuf0b.tif');
+im = imread('cells.tif');
 histo = hist(im(:),[0:255]);
 T = mean(mean(im))
 %Tmid = 50;
@@ -18,7 +18,7 @@ title('mid-way thresholded image');
 
 %%
 
-im = imread('nuf0b.tif');
+im = imread('cells.tif');
 histo = hist(im(:),[0:255]);
 T = Tmid
 Tmid = leastError(histo, T)

@@ -1,6 +1,6 @@
 % Read the image and cast it to double
 % ====================================
-nuf = double(imread('nuf4a.tif'));
+nuf = double(imread('nuf2a.tif'));
 % Extend the image
 % ================
 tmp = [nuf(:,64:-1:1) nuf nuf(:,128:-1:65)];
@@ -44,7 +44,7 @@ histo = hist(nuf(:),[0:255]);
 T =mean(mean(nuf));
 Tmid = mid_way(histo, T)
 T = Tmid 
-%Tmid = leastError(histo, T)
+Tmid = leastError(histo, T)
 nufTmid = nuf<=Tmid;
 figure(2)
 colormap(gray(256))

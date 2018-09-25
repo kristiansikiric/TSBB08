@@ -78,7 +78,12 @@ while abs(t0-t1) > 0.5
     a = (s0*s1)/(s1-s0);
     b = 2*(-(mean0/s0)+(mean1/s1));
     c = -2*log(p0/p1)+log(s0/s1)+(mean0^2/s0)-(mean1^2/s1);
-    t1 = floor(max(roots([1 a*b a*c])));
+    t1 = floor((roots([1 a*b a*c])));
+    if t1(1) > mean0 && t1(1) < mean1
+        t1 = t1(1);
+    else
+        t1 = t1(2);
+    end
     
 end;
 outT = t1;
