@@ -51,4 +51,26 @@ sum(sum(ImS))
 
 figure(5); colormap(gray(256)); imagesc(nuf); axis image; colorbar;
 
+%%
+
+im = double(imread('blod256.tif'));
+pattern = im(25:25+19, 18:18+19);
+fact = 0.55;
+rescorr = corrc(im, pattern);
+threshcorr = rescorr>(max(rescorr(:))*fact);
+figure(1)
+colormap(gray(256))
+subplot(2,2,1), imagesc(im, [0 255]);
+axis image; title('original image'); colorbar;
+subplot(2,2,2), imagesc(pattern, [0 255]);
+axis image; title('pattern'); colorbar;
+subplot(2,2,3), imagesc(rescorr);
+axis image; title('result corr'); colorbar;
+subplot(2,2,4), imagesc(threshcorr);
+axis image; title('thresh corr'); colorbar;
+
+
+S = bwmorph(threshcorr,'shrink',Inf);
+figure(2); imagesc(S);
+disp(['Corrc ', num2str(sum(sum(S)))])
 

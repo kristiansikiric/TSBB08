@@ -45,22 +45,28 @@ lpH=exp(-0.5*([-9:9]/sigma).^2);
 lpH=lpH/sum(lpH); % Horizontal filter
 lpV=lpH';         % Vertical filter
 
-T11_LP = conv2(T11,lpH,'valid');
+T11_LP = conv2(T11,lpH,'same');
+T11_LP = conv2(T11_LP,lpV,'same');
 figure(4);colormap(gray(256));
 subplot(121); imagesc(T11_LP,[0,2500]);colorbar('horizontal'); 
 axis image; axis off;
 title('T_1_1 LP')
 
-T22_LP = conv2(T22,lpV,'valid');
+T22_LP = conv2(T22,lpH,'same');
+T22_LP = conv2(T22_LP,lpV,'same');
 figure(4);colormap(gray(256));
 subplot(122); imagesc(T22_LP,[0,2500]);colorbar('horizontal'); 
 axis image; axis off;
 title('T_2_2 LP')
 
-z = T11 - T22 + 1i*2*T12;
+T12_LP = conv2(T12,lpH, 'same');
+T12_LP = conv2(T12_LP, lpV, 'same');
+T21_LP = T12_LP;
+
+z = T11_LP - T22_LP + 1i*2*T12_LP;
 zg = fx + 1i*fy;
 absz = abs(z);
-argz = atan2(T11-T22,2*T12);
+argz = atan2(2*T12_LP,T11_LP-T22_LP);
 
 [X,Y] = size(argz);
 for y = 1: Y
@@ -81,4 +87,3 @@ ax2=subplot(122); imagesc(argz);colorbar('horizontal');
 axis image; axis off;
 title('arg(z)')
 colormap(ax2,goptab());
-
