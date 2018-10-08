@@ -87,3 +87,5 @@ ax2=subplot(122); imagesc(argz);colorbar('horizontal');
 axis image; axis off;
 title('arg(z)')
 colormap(ax2,goptab());
+
+figure(6); gopimage(z); axis off;
