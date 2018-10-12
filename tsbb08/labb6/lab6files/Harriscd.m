@@ -19,6 +19,11 @@ T12 = fx.*fy;
 T21 = T12;
 T22 = fy.^2;
 
+sigma=2;
+lpH=exp(-0.5*([-9:9]/sigma).^2);
+lpH=lpH/sum(lpH); % Horizontal filter
+lpV=lpH';         % Vertical filter
+
 T = [T11 T12; T21 T22];
 
 T11_LP = conv2(T11,lpH,'same');
@@ -39,8 +44,8 @@ det_T = T11_LP.*T22_LP -T12_LP.^2;
 cH = det_T - k.*(tr_T_LP).^2;
 cHt = cH > 60000;
 
-%figure(2); imagesc(cHt); axis off; colormap(gray(256));
 
+%figure(2); imagesc(cHt); axis off; colormap(gray(256));
 cHmax = imregionalmax(cH);
 cHp = cHmax.*cHt;
 %figure(3); imagesc(cHp); axis off; colormap(gray(256));
@@ -48,5 +53,8 @@ cHp = cHmax.*cHt;
 r = ones(1,sum(sum((cHp)))).*4;
 viscircles([y x], r,'EdgeColor','r');
 
+figure(2); imagesc(T11_LP);
+figure(3); imagesc(T12_LP);
+figure(4); imagesc(T22_LP);
 
 
